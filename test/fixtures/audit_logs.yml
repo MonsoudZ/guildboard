@@ -1,0 +1,10 @@
+alice_sign_in:
+  actor: alice
+  organization:
+  action: auth.sign_in
+  auditable:
+  auditable_type:
+  metadata:
+    success: true
+  ip_address: 127.0.0.1
+  user_agent: test

@@ -1,0 +1,29 @@
+backlog:
+  project: core
+  creator: alice
+  assignee: bob
+  title: Build initial backlog
+  description: Gather and categorize all pending requests.
+  status: in_progress
+  priority: high
+  due_on: 2026-02-28
+
+auth_review:
+  project: core
+  creator: alice
+  assignee: alice
+  title: Review session security
+  description: Check CSRF and session rotation behavior.
+  status: todo
+  priority: medium
+  due_on: 2026-03-10
+
+legacy_task:
+  project: legacy
+  creator: alice
+  assignee: bob
+  title: Legacy cleanup
+  description: Read-only archived task.
+  status: done
+  priority: low
+  due_on: 2026-01-01

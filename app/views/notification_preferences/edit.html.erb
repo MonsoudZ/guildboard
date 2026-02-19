@@ -1,0 +1,19 @@
+<% content_for :title, "Notification preferences" %>
+
+<div class="card">
+  <h1>Notification preferences</h1>
+
+  <%= form_with model: @notification_preference, url: notification_preference_path, method: :patch do |form| %>
+    <label>
+      <%= form.check_box :digest_enabled %>
+      Enable daily due-task digest emails
+    </label>
+
+    <label>
+      <%= form.check_box :assignment_enabled %>
+      Enable task assignment emails
+    </label>
+
+    <%= form.submit "Save preferences" %>
+  <% end %>
+</div>

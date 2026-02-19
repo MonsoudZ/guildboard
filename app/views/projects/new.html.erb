@@ -1,0 +1,6 @@
+<% content_for :title, "New project" %>
+
+<div class="card">
+  <h1>New project for <%= @organization.name %></h1>
+  <%= render "form", organization: @organization, project: @project %>
+</div>

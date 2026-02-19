@@ -1,0 +1,12 @@
+record_not_found:
+  classification: record_not_found
+  error_class: ActiveRecord::RecordNotFound
+  message: Couldn't find Project with 'id'=999
+  request_id: req-existing-1
+  path: /organizations/1/projects/999
+  http_method: GET
+  user: alice
+  organization: acme
+  metadata:
+    controller: projects
+    action: show

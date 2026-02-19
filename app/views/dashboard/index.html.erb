@@ -1,0 +1,41 @@
+<% content_for :title, "Dashboard" %>
+
+<div class="card">
+  <h1>Dashboard</h1>
+  <p class="meta">Signed in as <%= current_user.name %> (<%= current_user.email %>).</p>
+</div>
+
+<div class="card">
+  <h2>Your organizations</h2>
+  <% if @organizations.any? %>
+    <ul class="clean">
+      <% @organizations.each do |organization| %>
+        <li>
+          <%= link_to organization.name, organization_path(organization) %>
+          <span class="meta"><%= organization.slug %></span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>You are not in an organization yet.</p>
+  <% end %>
+  <%= link_to "Create organization", new_organization_path %>
+</div>
+
+<div class="card">
+  <h2>Tasks assigned to you</h2>
+  <% if @assigned_tasks.any? %>
+    <ul class="clean">
+      <% @assigned_tasks.each do |task| %>
+        <li>
+          <%= link_to task.title, organization_project_task_path(task.project.organization, task.project, task) %>
+          <span class="meta">
+            <%= task.project.key %> • <%= task.status.humanize %> • <%= task.priority.humanize %>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No open tasks currently assigned to you.</p>
+  <% end %>
+</div>

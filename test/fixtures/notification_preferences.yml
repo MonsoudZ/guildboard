@@ -1,0 +1,9 @@
+alice:
+  user: alice
+  digest_enabled: true
+  assignment_enabled: true
+
+bob:
+  user: bob
+  digest_enabled: true
+  assignment_enabled: true

@@ -1,0 +1,19 @@
+pending_bob:
+  organization: acme
+  invited_by: alice
+  email: bob@example.test
+  role: member
+  token_digest: <%= OrganizationInvitation.digest("invite-token-bob") %>
+  expires_at: <%= 3.days.from_now %>
+  accepted_at:
+  accepted_by:
+
+expired_charlie:
+  organization: acme
+  invited_by: alice
+  email: charlie@example.test
+  role: member
+  token_digest: <%= OrganizationInvitation.digest("invite-token-expired") %>
+  expires_at: <%= 2.days.ago %>
+  accepted_at:
+  accepted_by:

@@ -1,0 +1,48 @@
+<% content_for :title, @task.title %>
+
+<div class="card">
+  <h1><%= @task.title %></h1>
+  <p><%= @task.description.presence || "No description yet." %></p>
+  <p class="meta">
+    Status: <%= @task.status.humanize %> |
+    Priority: <%= @task.priority.humanize %> |
+    Assignee: <%= @task.assignee.name %> |
+    Creator: <%= @task.creator.name %>
+  </p>
+  <% if @task.due_on.present? %>
+    <p class="meta">Due on <%= @task.due_on %></p>
+  <% end %>
+  <% if @project.writable? %>
+    <%= link_to "Edit task", edit_organization_project_task_path(@organization, @project, @task) %>
+  <% else %>
+    <p class="flash alert">This task belongs to an archived project and is read-only.</p>
+  <% end %>
+</div>
+
+<div class="card">
+  <h2>Comments</h2>
+  <% if @task_comments.any? %>
+    <ul class="clean">
+      <% @task_comments.each do |comment| %>
+        <li>
+          <strong><%= comment.author.name %></strong>
+          <span class="meta"><%= time_ago_in_words(comment.created_at) %> ago</span>
+          <p><%= comment.body %></p>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No comments yet.</p>
+  <% end %>
+</div>
+
+<% if @project.writable? %>
+  <div class="card">
+    <h3>Add comment</h3>
+    <%= form_with model: [@organization, @project, @task, @task_comment] do |form| %>
+      <%= form.label :body %>
+      <%= form.text_area :body, required: true %>
+      <%= form.submit "Post comment" %>
+    <% end %>
+  </div>
+<% end %>

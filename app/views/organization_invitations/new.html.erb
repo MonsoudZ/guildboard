@@ -1,0 +1,19 @@
+<% content_for :title, "Invite member" %>
+
+<div class="card">
+  <h1>Invite member to <%= @organization.name %></h1>
+
+  <% if @invitation.errors.any? %>
+    <p class="flash alert"><%= @invitation.errors.full_messages.to_sentence %></p>
+  <% end %>
+
+  <%= form_with model: [@organization, @invitation] do |form| %>
+    <%= form.label :email %>
+    <%= form.email_field :email, required: true, autofocus: true %>
+
+    <%= form.label :role %>
+    <%= form.select :role, OrganizationInvitation.roles.keys.map { |role| [role.humanize, role] }, required: true %>
+
+    <%= form.submit "Send invitation" %>
+  <% end %>
+</div>

@@ -1,0 +1,11 @@
+<h1>Task Digest for <%= @for_date %></h1>
+<p>Hi <%= @user.name %>,</p>
+<p>Here are your overdue and upcoming tasks:</p>
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <strong><%= task.project.key %></strong> -
+      <%= task.title %> (due <%= task.due_on %>, <%= task.status.humanize %>)
+    </li>
+  <% end %>
+</ul>

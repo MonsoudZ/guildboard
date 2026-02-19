@@ -1,0 +1,1 @@
+[{"severity":"convention","location":{"begin_pos":220,"end_pos":226},"message":"Style/RedundantReturn: Redundant `return` detected.","cop_name":"Style/RedundantReturn","status":"uncorrected"}]

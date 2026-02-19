@@ -1,0 +1,32 @@
+<% content_for :title, "#{@project.key} - #{@project.name}" %>
+
+<div class="card">
+  <h1><%= @project.key %> - <%= @project.name %></h1>
+  <p><%= @project.description.presence || "No description yet." %></p>
+  <p class="meta">Status: <%= @project.status.humanize %></p>
+  <% if @project.archived? %>
+    <p class="flash alert">This project is archived and read-only.</p>
+  <% else %>
+    <%= link_to "Edit project", edit_organization_project_path(@organization, @project) %>
+    |
+    <%= link_to "New task", new_organization_project_task_path(@organization, @project) %>
+  <% end %>
+</div>
+
+<div class="card">
+  <h2>Tasks</h2>
+  <% if @tasks.any? %>
+    <ul class="clean">
+      <% @tasks.each do |task| %>
+        <li>
+          <%= link_to task.title, organization_project_task_path(@organization, @project, task) %>
+          <span class="meta">
+            <%= task.status.humanize %> • <%= task.priority.humanize %> • Assigned to <%= task.assignee.name %>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No tasks yet.</p>
+  <% end %>
+</div>

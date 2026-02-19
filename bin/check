@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "==> Preparing database"
+bin/rails db:prepare
+
+echo "==> Running tests"
+bin/rails test
+
+echo "==> Running lint"
+RUBOCOP_CACHE_ROOT=tmp/rubocop RUBOCOP_OPTS=--no-server bin/rubocop
+
+echo "==> Running security scans"
+bin/brakeman --quiet --no-pager
+bin/bundler-audit check
+
+echo "==> All checks passed"

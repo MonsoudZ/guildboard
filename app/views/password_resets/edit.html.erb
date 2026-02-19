@@ -1,0 +1,16 @@
+<% content_for :title, "Set new password" %>
+
+<div class="card">
+  <h1>Set a new password</h1>
+  <p class="meta">Choose a new password with at least 12 characters.</p>
+
+  <%= form_with url: password_reset_path(params[:token]), method: :patch do |form| %>
+    <%= form.label :password %>
+    <%= form.password_field :password, required: true, autocomplete: "new-password" %>
+
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
+
+    <%= form.submit "Reset password" %>
+  <% end %>
+</div>

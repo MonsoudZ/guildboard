@@ -1,0 +1,22 @@
+<% content_for :title, "Sign in" %>
+
+<div class="card">
+  <h1>Sign in</h1>
+  <%= form_with url: session_path do |form| %>
+    <%= form.label :email %>
+    <%= form.email_field :email, required: true, autofocus: true, autocomplete: "email" %>
+
+    <%= form.label :password %>
+    <%= form.password_field :password, required: true, autocomplete: "current-password" %>
+
+    <%= form.submit "Sign in" %>
+  <% end %>
+
+  <p class="meta">
+    Forgot your password? <%= link_to "Reset it", new_password_reset_path %>.
+  </p>
+
+  <p class="meta">
+    New here? <%= link_to "Create an account", new_user_path %>.
+  </p>
+</div>

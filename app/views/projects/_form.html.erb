@@ -1,0 +1,21 @@
+<% if project.errors.any? %>
+  <p class="flash alert"><%= project.errors.full_messages.to_sentence %></p>
+<% end %>
+
+<%= form_with model: [organization, project] do |form| %>
+  <%= form.hidden_field :lock_version %>
+
+  <%= form.label :name %>
+  <%= form.text_field :name, required: true, autofocus: true %>
+
+  <%= form.label :key %>
+  <%= form.text_field :key, required: true, placeholder: "GB_CORE" %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.label :status %>
+  <%= form.select :status, Project.statuses.keys.map { |status| [status.humanize, status] } %>
+
+  <%= form.submit %>
+<% end %>

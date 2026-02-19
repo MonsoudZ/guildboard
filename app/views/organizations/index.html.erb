@@ -1,0 +1,18 @@
+<% content_for :title, "Organizations" %>
+
+<div class="card">
+  <h1>Organizations</h1>
+  <% if @organizations.any? %>
+    <ul class="clean">
+      <% @organizations.each do |organization| %>
+        <li>
+          <%= link_to organization.name, organization_path(organization) %>
+          <span class="meta"><%= organization.projects.size %> projects</span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No organizations yet.</p>
+  <% end %>
+  <%= link_to "Create organization", new_organization_path %>
+</div>

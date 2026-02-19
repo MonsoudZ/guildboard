@@ -1,0 +1,49 @@
+<h1>Error Dashboard</h1>
+
+<section class="card">
+  <h2>Classifications (Last 7 Days)</h2>
+  <% if @error_counts.empty? %>
+    <p class="meta">No errors captured in the last 7 days.</p>
+  <% else %>
+    <ul class="clean">
+      <% @error_counts.each do |classification, count| %>
+        <li>
+          <strong><%= classification %></strong>
+          <span class="meta">(<%= count %>)</span>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
+
+<section class="card">
+  <h2>Recent Errors</h2>
+  <% if @recent_errors.empty? %>
+    <p class="meta">No recent errors.</p>
+  <% else %>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>When (UTC)</th>
+          <th>Classification</th>
+          <th>Error</th>
+          <th>Path</th>
+          <th>Request ID</th>
+          <th>User</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recent_errors.each do |error_event| %>
+          <tr>
+            <td><%= error_event.created_at.utc.iso8601 %></td>
+            <td><%= error_event.classification %></td>
+            <td><%= error_event.error_class %></td>
+            <td><%= error_event.path %></td>
+            <td><code><%= error_event.request_id %></code></td>
+            <td><%= error_event.user&.email || "-" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</section>

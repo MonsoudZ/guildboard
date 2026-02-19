@@ -1,0 +1,27 @@
+<% if task.errors.any? %>
+  <p class="flash alert"><%= task.errors.full_messages.to_sentence %></p>
+<% end %>
+
+<%= form_with model: [organization, project, task] do |form| %>
+  <%= form.hidden_field :lock_version %>
+
+  <%= form.label :title %>
+  <%= form.text_field :title, required: true, autofocus: true %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.label :assignee_id, "Assignee" %>
+  <%= form.collection_select :assignee_id, members, :id, :name, prompt: "Select a member", required: true %>
+
+  <%= form.label :status %>
+  <%= form.select :status, Task.statuses.keys.map { |status| [status.humanize, status] } %>
+
+  <%= form.label :priority %>
+  <%= form.select :priority, Task.priorities.keys.map { |priority| [priority.humanize, priority] } %>
+
+  <%= form.label :due_on %>
+  <%= form.date_field :due_on %>
+
+  <%= form.submit %>
+<% end %>

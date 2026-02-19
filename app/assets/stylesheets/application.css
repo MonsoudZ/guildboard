@@ -1,0 +1,165 @@
+:root {
+  --bg: #f4f6f8;
+  --text: #1a232e;
+  --muted: #556273;
+  --card: #ffffff;
+  --border: #ccd6df;
+  --accent: #0d4a7a;
+  --danger: #8e2323;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #f7fafc 0%, var(--bg) 100%);
+}
+
+a {
+  color: var(--accent);
+}
+
+.wrap {
+  width: min(980px, 92vw);
+  margin: 0 auto;
+}
+
+.topbar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+
+.topbar .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  min-height: 56px;
+}
+
+.topbar nav {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.link-button {
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  text-decoration: underline;
+}
+
+h1, h2, h3 {
+  margin-top: 0;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 0.8rem;
+  background: #fff;
+}
+
+textarea {
+  min-height: 96px;
+}
+
+button,
+input[type="submit"] {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid #083656;
+  border-radius: 6px;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+}
+
+button.secondary,
+input[type="submit"].secondary {
+  background: #fff;
+  color: var(--accent);
+}
+
+.flash {
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 0.6rem;
+  border-radius: 6px;
+}
+
+.flash.alert {
+  border-color: #d9a3a3;
+  color: var(--danger);
+}
+
+.flash.notice {
+  border-color: #9dc6de;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+ul.clean {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.clean li {
+  padding: 0.5rem 0;
+  border-top: 1px solid #e5edf4;
+}
+
+ul.clean li:first-child {
+  border-top: 0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  border-top: 1px solid #e5edf4;
+  padding: 0.45rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table th {
+  color: var(--muted);
+  font-size: 0.9rem;
+}

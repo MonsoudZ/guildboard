@@ -1,0 +1,15 @@
+alice_active:
+  user: alice
+  name: cli
+  token_digest: <%= ApiToken.digest("alice-token") %>
+  expires_at: <%= 30.days.from_now %>
+  last_used_at:
+  revoked_at:
+
+bob_revoked:
+  user: bob
+  name: old
+  token_digest: <%= ApiToken.digest("bob-token") %>
+  expires_at: <%= 30.days.from_now %>
+  last_used_at:
+  revoked_at: <%= 1.day.ago %>

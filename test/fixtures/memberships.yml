@@ -1,0 +1,14 @@
+alice_owner_acme:
+  user: alice
+  organization: acme
+  role: owner
+
+bob_member_acme:
+  user: bob
+  organization: acme
+  role: member
+
+bob_owner_zen:
+  user: bob
+  organization: zen
+  role: owner

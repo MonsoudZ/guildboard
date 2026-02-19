@@ -1,0 +1,9 @@
+first_note:
+  task: backlog
+  author: alice
+  body: Prioritize requests from customer support first.
+
+follow_up:
+  task: backlog
+  author: bob
+  body: I will draft the first pass of categories.

@@ -1,0 +1,7 @@
+Hi <%= @user.name %>,
+
+Here is your due-task digest for <%= @for_date %>.
+
+<% @tasks.each do |task| %>
+- <%= task.project.key %> | <%= task.title %> | due <%= task.due_on %> | status <%= task.status.humanize %>
+<% end %>

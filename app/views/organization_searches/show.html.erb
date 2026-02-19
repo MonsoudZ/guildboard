@@ -1,0 +1,51 @@
+<% content_for :title, "Search #{@organization.name}" %>
+
+<div class="card">
+  <h1>Search <%= @organization.name %></h1>
+
+  <%= form_with url: organization_search_path(@organization), method: :get, local: true do |form| %>
+    <%= form.label :q, "Search projects and tasks" %>
+    <%= form.text_field :q, value: @query, placeholder: "Try: core, auth, backlog", autofocus: true %>
+    <%= form.submit "Search" %>
+  <% end %>
+</div>
+
+<% if @query.present? %>
+  <div class="card">
+    <h2>Projects</h2>
+    <% if @projects.any? %>
+      <ul class="clean">
+        <% @projects.each do |project| %>
+          <li>
+            <%= link_to "#{project.key} - #{project.name}", organization_project_path(@organization, project) %>
+            <span class="meta"><%= project.status.humanize %></span>
+          </li>
+        <% end %>
+      </ul>
+      <% if @more_projects %>
+        <%= link_to "Next page of project results", organization_search_path(@organization, q: @query, page: @page + 1) %>
+      <% end %>
+    <% else %>
+      <p>No matching projects found.</p>
+    <% end %>
+  </div>
+
+  <div class="card">
+    <h2>Tasks</h2>
+    <% if @tasks.any? %>
+      <ul class="clean">
+        <% @tasks.each do |task| %>
+          <li>
+            <%= link_to task.title, organization_project_task_path(@organization, task.project, task) %>
+            <span class="meta"><%= task.project.key %> • <%= task.status.humanize %> • <%= task.assignee.name %></span>
+          </li>
+        <% end %>
+      </ul>
+      <% if @more_tasks %>
+        <%= link_to "Next page of task results", organization_search_path(@organization, q: @query, page: @page + 1) %>
+      <% end %>
+    <% else %>
+      <p>No matching tasks found.</p>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "==> Preparing database"
+bin/rails db:prepare
+
+echo "==> Running migration safety checks"
+bin/rails deployment:migration_safety
+
+echo "==> Running deployment smoke tests"
+bin/rails test test/smoke/deployment_smoke_test.rb
+
+echo "==> Preflight passed"

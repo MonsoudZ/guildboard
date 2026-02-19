@@ -1,0 +1,8 @@
+core_project_created:
+  organization: acme
+  actor: alice
+  event_type: project.created
+  subject: core (Project)
+  metadata:
+    key: CORE
+    name: Core Platform

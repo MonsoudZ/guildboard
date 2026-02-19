@@ -1,0 +1,46 @@
+<% content_for :title, @organization.name %>
+
+<div class="card">
+  <h1><%= @organization.name %></h1>
+  <p class="meta">Slug: <%= @organization.slug %></p>
+  <%= link_to "New project", new_organization_project_path(@organization) %>
+  <% if @can_invite_members %>
+    |
+    <%= link_to "Invite member", new_organization_organization_invitation_path(@organization) %>
+  <% end %>
+  |
+  <%= link_to "Search", organization_search_path(@organization) %>
+</div>
+
+<div class="card">
+  <h2>Projects</h2>
+  <% if @projects.any? %>
+    <ul class="clean">
+      <% @projects.each do |project| %>
+        <li>
+          <%= link_to "#{project.key} - #{project.name}", organization_project_path(@organization, project) %>
+          <span class="meta"><%= project.status.humanize %></span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No projects yet.</p>
+  <% end %>
+</div>
+
+<div class="card">
+  <h2>Activity Feed</h2>
+  <% if @activity_events.any? %>
+    <ul class="clean">
+      <% @activity_events.each do |event| %>
+        <li>
+          <strong><%= event.actor.name %></strong>
+          <span class="meta"><%= time_ago_in_words(event.created_at) %> ago</span>
+          <p><%= event.summary %></p>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No activity yet.</p>
+  <% end %>
+</div>

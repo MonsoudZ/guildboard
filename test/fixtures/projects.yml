@@ -1,0 +1,20 @@
+core:
+  organization: acme
+  name: Core Platform
+  key: CORE
+  description: Foundational services and platform capabilities.
+  status: active
+
+site:
+  organization: zen
+  name: Marketing Site
+  key: SITE
+  description: Public website and growth experiments.
+  status: active
+
+legacy:
+  organization: acme
+  name: Legacy Migration
+  key: LEGACY
+  description: Archived initiative.
+  status: archived

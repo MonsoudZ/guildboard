@@ -1,0 +1,19 @@
+<% content_for :title, "New organization" %>
+
+<div class="card">
+  <h1>New organization</h1>
+
+  <% if @organization.errors.any? %>
+    <p class="flash alert"><%= @organization.errors.full_messages.to_sentence %></p>
+  <% end %>
+
+  <%= form_with model: @organization do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true, autofocus: true %>
+
+    <%= form.label :slug %>
+    <%= form.text_field :slug, required: true, placeholder: "example-company" %>
+
+    <%= form.submit "Create organization" %>
+  <% end %>
+</div>

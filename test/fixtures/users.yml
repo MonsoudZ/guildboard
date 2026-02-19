@@ -1,0 +1,14 @@
+alice:
+  name: Alice Lead
+  email: alice@example.test
+  password_digest: <%= BCrypt::Password.create("password123456") %>
+
+bob:
+  name: Bob Builder
+  email: bob@example.test
+  password_digest: <%= BCrypt::Password.create("password123456") %>
+
+charlie:
+  name: Charlie Outside
+  email: charlie@example.test
+  password_digest: <%= BCrypt::Password.create("password123456") %>

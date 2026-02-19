@@ -1,0 +1,25 @@
+<% content_for :title, "Accept invitation" %>
+
+<div class="card">
+  <h1>Invitation to join <%= @invitation.organization.name %></h1>
+  <p class="meta">
+    Invited email: <%= @invitation.email %> |
+    Role: <%= @invitation.role.humanize %>
+  </p>
+
+  <% if signed_in? %>
+    <% if current_user.email.downcase == @invitation.email %>
+      <%= form_with url: invitation_acceptance_path(params[:token]), method: :patch do |form| %>
+        <%= form.submit "Accept invitation" %>
+      <% end %>
+    <% else %>
+      <p class="flash alert">You are signed in as <%= current_user.email %>. Sign in as <%= @invitation.email %> to accept this invitation.</p>
+    <% end %>
+  <% else %>
+    <p class="meta">Sign in or create an account with <strong><%= @invitation.email %></strong>, then open this link again to accept.</p>
+    <p>
+      <%= link_to "Sign in", new_session_path %> |
+      <%= link_to "Create account", new_user_path %>
+    </p>
+  <% end %>
+</div>
