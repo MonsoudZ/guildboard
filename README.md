@@ -41,7 +41,7 @@ GuildBoard is a shell-first Rails monolith designed to train senior-level habits
 
 - Ruby `4.0.1`
 - Rails `8.1.2`
-- SQLite (development + test)
+- PostgreSQL (development + test + production)
 - Minitest
 - RuboCop + Brakeman + Bundler Audit
 
@@ -50,6 +50,9 @@ GuildBoard is a shell-first Rails monolith designed to train senior-level habits
 ```bash
 # install deps
 bundle install
+
+# start postgres locally
+docker compose up -d db
 
 # setup db and boot app
 bin/setup --skip-server
@@ -64,6 +67,8 @@ bin/preflight
 # run one test file
 bin/rails test test/controllers/tasks_controller_test.rb
 ```
+
+If you need custom database settings, export `DB_*` variables shown in `.env.example` before running commands.
 
 ## Learning Loop (Per Ticket)
 

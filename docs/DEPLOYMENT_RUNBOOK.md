@@ -13,6 +13,9 @@ This runbook defines the minimum safe release workflow for GuildBoard.
    - tests
    - migration-safety
    - smoke
+6. Confirm production Postgres URLs are set:
+   - `DATABASE_URL`
+   - `DATABASE_REPLICA_URL` (or intentional fallback to primary)
 
 ## Migration Safety Rules
 

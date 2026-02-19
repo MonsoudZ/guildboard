@@ -142,3 +142,11 @@ Use this file to capture important decisions with tradeoffs.
 - Decision: Add `bin/preflight`, `deployment:migration_safety`, smoke tests, and CI jobs for migration safety/smoke.
 - Consequences: Faster, repeatable release confidence; extra CI runtime and maintenance of smoke checks.
 - Alternatives Considered: manual deploy checklist only; full e2e suite as the only gate.
+
+### PostgreSQL as Primary Datastore
+- Date: 2026-02-19
+- Status: Accepted
+- Context: SQLite does not match expected production concurrency and operational behavior for this app.
+- Decision: Replace SQLite with PostgreSQL (`pg` gem), update Rails DB configs for all environments, and run CI/tests against Postgres service containers.
+- Consequences: Better parity with production behavior and stronger transactional semantics; requires running a local/CI Postgres service and managing DB environment variables.
+- Alternatives Considered: keep SQLite for dev/test only; mixed adapter strategy by environment.

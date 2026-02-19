@@ -5,10 +5,13 @@ Use this command set as your default loop.
 ## Setup
 
 ```bash
+docker compose up -d db
 bundle install
 bin/rails db:prepare
 bin/rails db:seed
 ```
+
+Optional: export `DB_*` vars from `.env.example` if you are not using the defaults.
 
 ## Daily Loop
 
