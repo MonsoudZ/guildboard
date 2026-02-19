@@ -151,6 +151,128 @@ This backlog is intentionally progressive. Start at T01 and move in order.
 - Tests: CI includes migration + smoke test stages.
 - Senior review checklist: reversible migrations and failure-domain clarity.
 
+## Advanced Senior Growth (Staff-Ready)
+
+### T21 - API Pagination Contract
+- Scope: standardize pagination metadata and cursor/offset strategy across API list endpoints.
+- Acceptance: all list endpoints return predictable pagination fields and stable ordering guarantees.
+- Tests: request tests for first/next/last page behavior and edge cases.
+- Senior review checklist: deterministic ordering under concurrent writes.
+
+### T22 - API Filtering and Sorting DSL
+- Scope: add explicit allowlisted filter/sort query parameters for projects/tasks endpoints.
+- Acceptance: unsupported fields fail with clear errors; supported filters are composable.
+- Tests: request tests for valid/invalid combinations and SQL safety.
+- Senior review checklist: avoid implicit query behavior and unbounded scans.
+
+### T23 - Idempotency Keys for Write APIs
+- Scope: support idempotency keys on POST/PATCH API writes to prevent duplicate side effects.
+- Acceptance: repeated requests with same key and payload return same logical result.
+- Tests: request/integration tests for retries, mismatched payload, and TTL expiry.
+- Senior review checklist: storage strategy for key lifecycle and replay safety.
+
+### T24 - Transactional Outbox Pattern
+- Scope: publish domain events via an outbox table written in the same transaction as domain changes.
+- Acceptance: no event loss between DB commit and async delivery worker.
+- Tests: service and job tests for exactly-once handoff semantics at app boundary.
+- Senior review checklist: ordering, retry policy, and poison-message handling.
+
+### T25 - Webhook Delivery Engine
+- Scope: implement webhook subscriptions, signed payloads, retry backoff, and dead-letter handling.
+- Acceptance: subscribers receive verifiable events with retry visibility.
+- Tests: job and integration tests for signature verification and retry exhaustion.
+- Senior review checklist: replay attacks, timeout strategy, and tenant isolation.
+
+### T26 - Rate Limiting and Abuse Controls
+- Scope: enforce per-user/per-token and per-IP limits on auth and API endpoints.
+- Acceptance: over-limit requests return clear 429 responses with retry hints.
+- Tests: request tests for burst and sustained limit behavior.
+- Senior review checklist: fairness, lockout avoidance, and operational tunability.
+
+### T27 - Feature Flags and Gradual Rollouts
+- Scope: add server-side feature flags scoped by organization/user with percentage rollout support.
+- Acceptance: new features can be enabled gradually and rolled back instantly.
+- Tests: unit and request tests for targeting rules and defaults.
+- Senior review checklist: safe defaults and audit trail for flag changes.
+
+### T28 - SLO and Error Budget Instrumentation
+- Scope: define service-level objectives (availability/latency) and compute error budget burn.
+- Acceptance: weekly SLO report generated with burn-rate indicators.
+- Tests: service tests for SLO math and report generation correctness.
+- Senior review checklist: objective realism and alert fatigue tradeoffs.
+
+### T29 - Alerting Pipeline
+- Scope: add threshold-based alerts from error events and key business failures.
+- Acceptance: critical conditions produce deduped actionable alerts with context links.
+- Tests: job/service tests for dedupe windows and escalation policy.
+- Senior review checklist: noisy-alert suppression and on-call usability.
+
+### T30 - Incident Timeline Report
+- Scope: generate timeline views by correlating audit logs, activity events, and errors by request/time window.
+- Acceptance: operators can reconstruct major incidents quickly from one report.
+- Tests: integration tests for timeline ordering and cross-source joins.
+- Senior review checklist: time-source consistency and missing-data handling.
+
+### T31 - Safe Backfill Framework
+- Scope: build reusable batched backfill jobs with checkpoints and throttling.
+- Acceptance: large data backfills can pause/resume without duplicate writes.
+- Tests: job tests for checkpoint recovery and partial-failure continuation.
+- Senior review checklist: lock contention, observability, and rollback plan.
+
+### T32 - Expand/Contract Migration Playbook
+- Scope: implement one real schema change using expand/contract (dual-write + backfill + cutover).
+- Acceptance: deploy sequence works without downtime.
+- Tests: migration and integration tests across both schema states.
+- Senior review checklist: compatibility window and cutover guardrails.
+
+### T33 - Tenant Isolation Verification Suite
+- Scope: add systematic tests that assert organization boundary enforcement across controllers, APIs, queries, and jobs.
+- Acceptance: no cross-tenant read/write paths remain.
+- Tests: integration tests for positive/negative tenant access matrix.
+- Senior review checklist: deny-by-default posture and least-privilege review.
+
+### T34 - Load Test Baseline and Budgets
+- Scope: establish repeatable load scenarios for dashboard/search/API write paths.
+- Acceptance: documented throughput/latency/error baseline and budget thresholds.
+- Tests: scripted load test scenarios committed to repo.
+- Senior review checklist: representative traffic model and resource bottleneck analysis.
+
+### T35 - Query Plan and Index Tuning
+- Scope: identify top slow queries, add/adjust indexes, and document EXPLAIN plans before/after.
+- Acceptance: measurable latency reduction on selected hot paths.
+- Tests: query-level tests or benchmarks with target thresholds.
+- Senior review checklist: index maintenance cost versus read gains.
+
+### T36 - Backup and Restore Drill
+- Scope: define automated backup routine and execute restore drill in non-prod.
+- Acceptance: restore time objective (RTO) and data loss objective (RPO) measured and documented.
+- Tests: scripted verification that restored app boots and passes smoke checks.
+- Senior review checklist: encryption, retention policy, and restore ownership.
+
+### T37 - Secrets Rotation Runbook
+- Scope: design and exercise rotation for API tokens, mail credentials, and app secrets with zero downtime.
+- Acceptance: rotation can be performed safely with rollback steps.
+- Tests: operational test checklist and validation script for secret switchover.
+- Senior review checklist: blast radius and stale-secret detection.
+
+### T38 - API v2 Evolution Strategy
+- Scope: introduce a v2 endpoint slice with backwards-compatible deprecation signaling for v1.
+- Acceptance: v1 clients continue to work with documented sunset headers.
+- Tests: contract tests for v1/v2 behavior differences and compatibility.
+- Senior review checklist: versioning policy clarity and migration path for consumers.
+
+### T39 - OpenAPI and Consumer Contract Testing
+- Scope: publish OpenAPI spec and enforce response/schema contracts in CI.
+- Acceptance: API changes that break contracts fail CI.
+- Tests: schema validation tests and example-driven contract fixtures.
+- Senior review checklist: docs/source-of-truth alignment and drift prevention.
+
+### T40 - Resilience Game Day
+- Scope: run controlled fault-injection scenarios (DB latency, job failures, mail outage) and capture response quality.
+- Acceptance: postmortem with concrete follow-up actions and owners.
+- Tests: scripted chaos scenarios that are safe in non-production environments.
+- Senior review checklist: learning focus, containment boundaries, and measurable improvements.
+
 ## Definition of Done (All Tickets)
 
 - All relevant tests added and passing.
